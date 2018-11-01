@@ -7,7 +7,7 @@ IfWinNotExist 热键目录（按←→键切换，Esc键关闭）
 	
 	Gui, font, s10, 微软雅黑
 	Gui, +Resize
-	Gui, Add, Tab3, vMenu_tab, 常规|左Alt键|右Alt键|Win键|其他|自动挂载|网站|关于
+	Gui, Add, Tab3, vMenu_tab, 常规|左Alt键|右Alt键|Win键|其他|可选|网站|关于
 	Gui, Tab, 1
 	
 	SetRegView 64
@@ -85,8 +85,34 @@ IfWinNotExist 热键目录（按←→键切换，Esc键关闭）
 	
 	LV_ModifyCol()
 	Gui, Tab, 6
-	Gui, Add, Text, w470, 以下功能默认启用，无法单独禁用，如需停用请禁用脚本或退出脚本。`n`n1）屏蔽掉了Windows键`n经常误按弹出菜单很烦，屏蔽后并不影响“Win+其他热键”的使用。`n2）屏蔽掉了应用键（菜单键）`n不认识这个键？就是右Ctrl左边这个键，功能相当于鼠标右键，几乎没用过，误按到也烦还是屏蔽掉吧。`n3）PS、AI中禁用Alt键选中菜单栏`n经常在用Alt+滚轮缩放后切换工具误切出菜单栏选项？现在再试试，这个烦恼不会再出现了。
 	
+	IniRead, b_windowsKey, %A_ScriptDir%\config.ini, General, IsShieldingWindowskey
+	if (b_windowsKey = 1)
+		Gui, Add, Checkbox, x30 y66 Checked vc_windowsKey gShieldingWindowskey, 屏蔽Windows键
+	else
+		Gui, Add, Checkbox, x30 y66 vc_windowsKey gShieldingWindowskey, 屏蔽Windows键
+	Gui, font, s10 c808080, 微软雅黑
+	Gui, Add, Text, w470, 经常误按弹出菜单很烦？屏蔽后并不影响“Win+其他热键”的使用。
+	
+	IniRead, b_appsKey, %A_ScriptDir%\config.ini, General, IsShieldingAppsKey
+	Gui, font, s10 cDefault, 微软雅黑
+	if (b_appsKey = 1)
+		Gui, Add, Checkbox, x30 y116 Checked vc_appsKey gShieldingAppsKey, 屏蔽应用键（菜单键）
+	else
+		Gui, Add, Checkbox, x30 y116 vc_appsKey gShieldingAppsKey, 屏蔽应用键（菜单键）
+	Gui, font, s10 c808080, 微软雅黑
+	Gui, Add, Text, w470, 不认识这个键？就是右Ctrl左边这个键，功能相当于鼠标右键，几乎没用过，误按到也烦还是屏蔽掉吧。
+	
+	IniRead, b_altKey, %A_ScriptDir%\config.ini, General, IsAltKeySelectOption
+	Gui, font, s10 cDefault, 微软雅黑
+	if (b_altKey = 1)
+		Gui, Add, Checkbox, x30 y186 Checked vc_altKey gAltKeySelectOption, 禁止Alt键选中菜单栏选项
+	else
+		Gui, Add, Checkbox, x30 y186 vc_altKey gAltKeySelectOption, 禁止Alt键选中菜单栏选项
+	Gui, font, s10 c808080, 微软雅黑
+	Gui, Add, Text, w470, 在使用PS、AI的时候，经常在用Alt+滚轮缩放后切换工具误切出菜单栏选项？现在再试试，这个烦恼不会再出现了。
+	
+	Gui, font, s10 cDefault, 微软雅黑
 	Gui, Tab, 7
 	Gui, Add, Text,, 快速打开常用网站：`n现在试试按顺序按下“//bd”，再按回车键，即可打开百度首页。`n已预设的网站缩写如下：
 	Gui, Add, ListView, r13 w470 vMenu_listView7 -Multi, 缩写|打开链接|网站名称
@@ -143,8 +169,8 @@ IfWinNotExist 热键目录（按←→键切换，Esc键关闭）
 	Gui, Add, Text,, Windows热键扩展
 	Gui, font, s12 w400
 	Gui, Add, Text,, Version 1.1.0
-	Gui, Add, Link,, 本软件为免费开源软件，请访问网站以<a href="https://www.baidu.com">下载最新版</a>`n如果你觉得好用，不妨分享给身边的好友们^_^
-	Gui, Add, Text,, 在使用过程中如有Bug或其他建议欢迎反馈`nEmail：3450034600@qq.com
+	Gui, Add, Link,, 本工具为免费开源软件，使用<a href="https://www.autohotkey.com/">AutoHotKey</a>编写。`n请访问GitHub以<a href="https://github.com/UnrealStars/WindowsHotkeyExtend.git">下载最新版或源码</a>。`n如果你觉得好用，不妨分享给身边的好友们^_^
+	Gui, Add, Text,, 在使用过程中如有Bug或其他建议欢迎反馈。`nEmail：3450034600@qq.com
 	
 	Gui, Add, Button, x25 y280 w60 h30, 卸载
 
@@ -173,6 +199,30 @@ else if (c_showIcon = 0)
 	IniWrite, 1, %A_ScriptDir%\config.ini, General, IsShowIcon
 	Menu , tray , icon
 }
+return
+
+ShieldingWindowskey:
+Gui, Submit, NoHide
+if (c_windowsKey = 1)
+	IniWrite, 1, %A_ScriptDir%\config.ini, General, IsShieldingWindowskey
+else if (c_windowsKey = 0)
+	IniWrite, 0, %A_ScriptDir%\config.ini, General, IsShieldingWindowskey
+return
+
+ShieldingAppsKey:
+Gui, Submit, NoHide
+if (c_appsKey = 1)
+	IniWrite, 1, %A_ScriptDir%\config.ini, General, IsShieldingAppsKey
+else if (c_appsKey = 0)
+	IniWrite, 0, %A_ScriptDir%\config.ini, General, IsShieldingAppsKey
+return
+
+AltKeySelectOption:
+Gui, Submit, NoHide
+if (c_altKey = 1)
+	IniWrite, 1, %A_ScriptDir%\config.ini, General, IsAltKeySelectOption
+else if (c_altKey = 0)
+	IniWrite, 0, %A_ScriptDir%\config.ini, General, IsAltKeySelectOption
 return
 
 GuiSize:
