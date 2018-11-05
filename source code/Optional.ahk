@@ -25,10 +25,32 @@ else
 #IfWinActive, A
 ~LAlt up::
 IniRead, i_altKey, %A_ScriptDir%\config.ini, General, IsAltKeySelectOption
-if (i_altKey = 1)
-{
+if i_altKey = 1
 	Send {Alt}
-}
 return
 #IfWinActive
+;==================================================
+;屏蔽Ctrl+滚轮缩放
+^WheelDown::
+IniRead, i_ctrlWheel, %A_ScriptDir%\config.ini, General, IsCtrlWheel
+if (i_ctrlWheel = 1)
+{
+	return
+}
+else
+{
+	Send ^{WheelDown}
+	return
+}
+^WheelUp::
+IniRead, i_ctrlWheel, %A_ScriptDir%\config.ini, General, IsCtrlWheel
+if (i_ctrlWheel = 1)
+{
+	return
+}
+else
+{
+	Send ^{WheelUp}
+	return
+}
 ;==================================================

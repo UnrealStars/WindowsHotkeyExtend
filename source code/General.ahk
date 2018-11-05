@@ -94,25 +94,34 @@ IfWinNotExist 热键目录（按←→键切换，Esc键关闭）
 	else
 		Gui, Add, Checkbox, x30 y66 vc_windowsKey gShieldingWindowskey, 屏蔽Windows键
 	Gui, font, s10 c808080, 微软雅黑
-	Gui, Add, Text, w470, 经常误按弹出菜单很烦？屏蔽后并不影响“Win+其他热键”的使用。
+	Gui, Add, Text, w470, 日常使用中，打游戏中，很少用到却经常误按弹出菜单很烦？屏蔽后并不影响“Win+其他热键”的使用。
 	
 	IniRead, b_appsKey, %A_ScriptDir%\config.ini, General, IsShieldingAppsKey
 	Gui, font, s10 cDefault, 微软雅黑
 	if (b_appsKey = 1)
-		Gui, Add, Checkbox, x30 y116 Checked vc_appsKey gShieldingAppsKey, 屏蔽应用键（菜单键）
+		Gui, Add, Checkbox, x30 y136 Checked vc_appsKey gShieldingAppsKey, 屏蔽应用键（菜单键）
 	else
-		Gui, Add, Checkbox, x30 y116 vc_appsKey gShieldingAppsKey, 屏蔽应用键（菜单键）
+		Gui, Add, Checkbox, x30 y136 vc_appsKey gShieldingAppsKey, 屏蔽应用键（菜单键）
 	Gui, font, s10 c808080, 微软雅黑
-	Gui, Add, Text, w470, 不认识这个键？就是右Ctrl左边这个键，功能相当于鼠标右键，几乎没用过，误按到也烦还是屏蔽掉吧。
+	Gui, Add, Text, w470, 不认识这个键？就是右Ctrl左边这个键，功能相当于鼠标右键，很少用到的话，误按到也烦还是屏蔽掉吧。
 	
 	IniRead, b_altKey, %A_ScriptDir%\config.ini, General, IsAltKeySelectOption
 	Gui, font, s10 cDefault, 微软雅黑
 	if (b_altKey = 1)
-		Gui, Add, Checkbox, x30 y186 Checked vc_altKey gAltKeySelectOption, 禁止Alt键选中菜单栏选项
+		Gui, Add, Checkbox, x30 y206 Checked vc_altKey gAltKeySelectOption, 禁用Alt键选中菜单栏选项
 	else
-		Gui, Add, Checkbox, x30 y186 vc_altKey gAltKeySelectOption, 禁止Alt键选中菜单栏选项
+		Gui, Add, Checkbox, x30 y206 vc_altKey gAltKeySelectOption, 禁用Alt键选中菜单栏选项
 	Gui, font, s10 c808080, 微软雅黑
 	Gui, Add, Text, w470, 在使用PS、AI的时候，经常在用Alt+滚轮缩放后切换工具误切出菜单栏选项？现在再试试，这个烦恼不会再出现了。
+	
+	IniRead, b_ctrlWheel, %A_ScriptDir%\config.ini, General, IsCtrlWheel
+	Gui, font, s10 cDefault, 微软雅黑
+	if (b_ctrlWheel = 1)
+		Gui, Add, Checkbox, x30 y276 Checked vc_ctrlWheel gCtrlWheel, 禁用Ctrl+滚轮缩放
+	else
+		Gui, Add, Checkbox, x30 y276 vc_ctrlWheel gCtrlWheel, 禁用Ctrl+滚轮缩放
+	Gui, font, s10 c808080, 微软雅黑
+	Gui, Add, Text, w470, 在浏览器中，在IDE中，Ctrl+滚轮可以缩放界面大小，但是自己好像误按的频率总是比使用频率要高？那你可以考虑直接禁用掉它。
 	
 	Gui, font, s10 cDefault, 微软雅黑
 	Gui, Tab, 7
@@ -225,6 +234,14 @@ if (c_altKey = 1)
 	IniWrite, 1, %A_ScriptDir%\config.ini, General, IsAltKeySelectOption
 else if (c_altKey = 0)
 	IniWrite, 0, %A_ScriptDir%\config.ini, General, IsAltKeySelectOption
+return
+
+CtrlWheel:
+Gui, Submit, NoHide
+if (c_ctrlWheel = 1)
+	IniWrite, 1, %A_ScriptDir%\config.ini, General, IsCtrlWheel
+else if (c_ctrlWheel = 0)
+	IniWrite, 0, %A_ScriptDir%\config.ini, General, IsCtrlWheel
 return
 
 GuiSize:

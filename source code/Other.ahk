@@ -89,3 +89,9 @@ return
 rctrl & Down:: MouseMove,  0,  1,, R
 return
 ;==================================================
+/*
+;◆左Shift+滚轮：快速切换窗口
+LShift & WheelDown::AltTab
+LShift & WheelUp::ShiftAltTab
+*/
+;==================================================
