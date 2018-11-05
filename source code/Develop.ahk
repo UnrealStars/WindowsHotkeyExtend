@@ -8,7 +8,9 @@ return
 ;==================================================
 ;◆右Alt+9：刷新脚本
 ralt & 9::
-msgbox, 刷新脚本
+tooltip, 刷新脚本, A_ScreenWidth / 2 - 30, A_ScreenHeight / 2 - 10
+sleep, 1000
+tooltip
 Reload
 return
 ;==================================================

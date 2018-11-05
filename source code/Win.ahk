@@ -59,7 +59,7 @@ if (A_YYYY = Shutdown_date_y && A_MM = Shutdown_date_m && A_DD = Shutdown_date_d
 		MsgBox, 0, 提示, 已取消定时注销
 	}
 }
-else if (A_YYYY = Shutdown_date_y && A_MM = Shutdown_date_m && A_DD = Shutdown_date_d && A_Hour = Shutdown_date_h && A_Min = Shutdown_date_min)
+else if ((A_YYYY = Shutdown_date_y && A_MM = Shutdown_date_m && A_DD = Shutdown_date_d && A_Hour = Shutdown_date_h) && (A_Min = Shutdown_date_min || A_Min = Shutdown_date_min + 1))
 {
 	SetTimer, TimingLogoff, Off
 	Gui Destroy
@@ -255,7 +255,7 @@ if (A_YYYY = Shutdown_date_y && A_MM = Shutdown_date_m && A_DD = Shutdown_date_d
 		MsgBox, 0, 提示, 已取消定时关机
 	}
 }
-else if (A_YYYY = Shutdown_date_y && A_MM = Shutdown_date_m && A_DD = Shutdown_date_d && A_Hour = Shutdown_date_h && A_Min = Shutdown_date_min)
+else if ((A_YYYY = Shutdown_date_y && A_MM = Shutdown_date_m && A_DD = Shutdown_date_d && A_Hour = Shutdown_date_h) && (A_Min = Shutdown_date_min || A_Min = Shutdown_date_min + 1))
 {
 	SetTimer, TimingShutdown, Off
 	Gui Destroy
@@ -442,7 +442,7 @@ if (A_YYYY = Shutdown_date_y && A_MM = Shutdown_date_m && A_DD = Shutdown_date_d
 		MsgBox, 0, 提示, 已取消定时重启
 	}
 }
-else if (A_YYYY = Shutdown_date_y && A_MM = Shutdown_date_m && A_DD = Shutdown_date_d && A_Hour = Shutdown_date_h && A_Min = Shutdown_date_min)
+else if ((A_YYYY = Shutdown_date_y && A_MM = Shutdown_date_m && A_DD = Shutdown_date_d && A_Hour = Shutdown_date_h) && (A_Min = Shutdown_date_min || A_Min = Shutdown_date_min + 1))
 {
 	SetTimer, TimingRestart, Off
 	Gui Destroy

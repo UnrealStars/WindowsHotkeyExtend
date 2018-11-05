@@ -115,3 +115,5 @@ return
 return
 ::/ahk::AutoHotKey
 return
+::/whe::WindowsHotkeyExtend
+return

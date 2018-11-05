@@ -118,14 +118,14 @@ RAlt & R::
 Run regedit.exe
 return
 ;==================================================
+;◆右Alt+S：打开截图工具
 RAlt & S::
-
+Run SnippingTool.exe
 return
 ;==================================================
-;◆右Alt+T：在当前位置新建记事本
+;◆右Alt+T：打开便笺
 RAlt & T::
-;Click right
-;Send w{Down}{Down}{Down}{Down}{Down}{Down}{Down}{Down}{Down}{Enter}
+Run StikyNot.exe
 return
 ;==================================================
 ;◆右Alt+U：打开卸载/更改程序
@@ -136,10 +136,10 @@ return
 ;◆右Alt+V：复制当前选中文件的路径
 RAlt & V::
 send ^c
-sleep,200
-clipboard = %clipboard% ;%null%
-tooltip,%clipboard%
-sleep,500
+sleep, 200
+clipboard = %clipboard%
+tooltip, %clipboard%
+sleep, 500
 tooltip,
 return
 ;==================================================
