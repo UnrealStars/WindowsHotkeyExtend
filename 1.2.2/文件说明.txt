@@ -1,0 +1,27 @@
+WindowsHotkeyExtend_1.2.2.exe：Windows热键扩展工具（单个文件即可运行）
+
+文件说明.txt：当前记事本
+
+工具介绍.jpg：工具介绍
+
+“source code”文件夹：源码，使用“AutoHotKey 1.1.30.00”编写
+
+Develop.ahk：开发时使用的热键（发布时取消引入）
+
+General.ahk：常规热键
+
+Index.ahk：入口脚本
+
+LAlt.ahk：左Alt键相关热键
+
+Optional.ahk：可选功能
+
+Other.ahk：其他热键
+
+RAlt.ahk：右Alt键相关热键
+
+Test.ahk：开发时的测试脚本（发布时取消引入）
+
+WebAbbreviation.ahk：网站缩写相关定义
+
+Win.ahk：Windows键相关热键
